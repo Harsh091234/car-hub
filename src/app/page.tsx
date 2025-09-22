@@ -1,9 +1,9 @@
-import Hero from "./components/Hero";
+import Hero from "@/components/Hero";
 
 
 export default function Home() {
   return (
-    <main className="overflow-hidden">
+    <main className=" mt-13 flex-1">
       <Hero />
     </main>
   );

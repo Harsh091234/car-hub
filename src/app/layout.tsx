@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 
 import "./globals.css";
-import Navbar from "./components/Navbar";
-import Footer from "./components/Footer";
+import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
 
 
 
@@ -19,7 +19,7 @@ export default function RootLayout({
   return (
     <html lang="en"      style={{filter:"invert(0)"}}>
       <body
-        className="relative bg-white min-h-screen"
+        className=" bg-white min-h-screen  flex flex-col"
       > 
         <Navbar />
         {children}
