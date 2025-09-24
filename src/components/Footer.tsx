@@ -8,7 +8,7 @@ import Link from 'next/link'
 
 const Footer = () => {
   return (
-    <footer className="bg-gray-200 border-t border-t-gray-300   pt-6 pb-3">
+    <footer className="bg-gray-200   pt-6 pb-3">
       <div className="max-w-7xl mx-auto px-4 md:px-8 flex flex-col md:flex-row justify-between items-start gap-4 md:gap-8">
 
         {/* Left: Logo + Copyright */}

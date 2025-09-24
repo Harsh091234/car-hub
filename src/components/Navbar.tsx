@@ -19,8 +19,8 @@ useEffect(() => {
     <nav
       className={`fixed w-full top-0 left-0 z-50 transition-all duration-100 ${
   scrolled
-    ? 'bg-white/20 backdrop-blur-3xl border-b border-b-gray-300 ' // blur + border on scroll
-    : 'bg-white border-b border-transparent' // no visible border at top
+    ? 'bg-white/20 backdrop-blur-3xl border-b border-b-transparent ' // blur + border on scroll
+    : 'bg-white border-b border-b-gray-200' // no visible border at top
 }`}
 
     >
