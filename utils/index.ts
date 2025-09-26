@@ -1,17 +1,24 @@
 
-export async function fetchCars() {
-    const headers = {
-        "X-RapidAPI-Key": "94a8975979mshbffba4fa4747392p145c69jsn0aa7101ff219",
-        "X-RapidAPI-Host": "cars-by-api-ninjas.p.rapidapi.com"
-    }
+import { CarProps } from "../types"; 
 
-    const response = await fetch('https://cars-by-api-ninjas.p.rapidapi.com/v1/cars?model=corolla', {
-        headers: headers
-    })
-    
-    const result = await response.json()
-    return result
-}
+const API_URL = "https://api.carapi.app/vehicles";
+const API_KEY = "804d0c760a542516e0a9a1edc454d24f";
+
+export const fetchCars = async (): Promise<any[]> => {
+  const response = await fetch(`${API_URL}?make=Toyota`, {
+    headers: {
+      'Authorization': `Bearer ${API_KEY}`,
+      'Accept': 'application/json',
+    },
+  });
+  console.log("res", response)
+  if (!response.ok) {
+    throw new Error('Failed to fetch cars');
+  }
+
+  const data = await response.json();
+  return data;
+};
 
 export const calculateCarRent = (city_mpg: number, year: number) => {
     const basePricePerDay = 50;

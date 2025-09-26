@@ -19,7 +19,7 @@ const Hero = () => {
           </p>
           <CustomButton
             title="Explore Cars"
-            containerStyles="bg-[var(--color-primary)] py-2 px-6 text-sm md:text-base rounded-full text-gray-200 hover:bg-blue-700 transition w-full min-[420px]:w-70 md:w-40"
+            containerStyles="bg-[var(--color-primary)] hover:bg-[var(--color-hovered-primary)] active:bg-[var(--color-hovered-primary)] py-2 px-6 text-sm md:text-base rounded-full text-gray-200  transition w-full min-[420px]:w-70 md:w-40"
             btnType="button"
           />
         </div>

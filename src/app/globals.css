@@ -6,7 +6,8 @@
 
 @layer base{
   :root {
-  --color-primary:#3F51B5;   /* Tailwind blue-600 */
+  --color-primary:#3F51B5; /* Tailwind blue-500 */
+   --color-hovered-primary: #303F9F;  /* Tailwind blue-600 */
   --color-secondary: #9333ea; /* purple-600 */
   --color-background: #ffffff;
   --color-text: #111827;
