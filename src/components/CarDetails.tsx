@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import { CarProps } from "../../types";
 import { Dialog, Transition } from "@headlessui/react";
 import Image from "next/image";
@@ -10,6 +10,49 @@ interface CarDetailsProps {
 }
 
 const CarDetails = ({ isOpen, closeModal, car }: CarDetailsProps) => {
+ 
+ 
+   const [selectedImage, setSelectedImage] = useState(
+    car.imageUrls?.[0] || "/car-placeholder.png"
+  );
+
+  const [thumbnails, setThumbnails] = useState<string[]>(
+    car.imageUrls?.slice(1, 4) || [
+      "/car-placeholder.png",
+      "/car-placeholder.png",
+      "/car-placeholder.png",
+    ]
+  );
+
+   useEffect(() => {
+  if (!isOpen) {
+    // Add a delay (e.g. 300ms)
+    const timer = setTimeout(() => {
+      setSelectedImage(car.imageUrls?.[0] || "/car-placeholder.png");
+      setThumbnails(
+        car.imageUrls?.slice(1, 4) || [
+          "/car-placeholder.png",
+          "/car-placeholder.png",
+          "/car-placeholder.png",
+        ]
+      );
+    }, 300); // 👈 delay in ms
+
+    return () => clearTimeout(timer); // cleanup if unmounted/closed quickly
+  }
+}, [car, isOpen]);
+
+  const handleThumbnailClick = (thumb: string, index: number) => {
+    const newThumbnails = [...thumbnails];
+    const oldMain = selectedImage;
+
+    // swap
+    newThumbnails[index] = oldMain;
+    setSelectedImage(thumb);
+    setThumbnails(newThumbnails);
+  };
+
+
   return (
     <Transition appear show={isOpen} as={Fragment}>
       <Dialog as="div" className="relative  z-20" onClose={closeModal}>
@@ -55,47 +98,37 @@ const CarDetails = ({ isOpen, closeModal, car }: CarDetailsProps) => {
                 </button>
 
                 {/* Images Section */}
-                <div className="flex flex-col gap-4">
-                  <div className="relative w-full h-35 sm:h-47 bg-gray-100 rounded-lg">
+                <div className="flex flex-col  gap-4">
+                  {/* main image */}
+                  <div className="relative mx-auto w-full min-[316px]:w-70 sm:w-79 md:w-88 h-35 sm:h-45 rounded-lg  overflow-hidden ">
                     <Image
-                      src="/hero.png"
+                         src={selectedImage}
+                      
                       alt="car model"
                       fill
                       priority
-                      className="object-contain p-2"
+                      className="object-cover h-full w-full"
                     />
                   </div>
-
+                    {/* side images */}
                   <div className="flex gap-3">
-                    <div className="flex-1 relative w-full h-16 min-[336px]:h-20  sm:h-24 bg-gray-200 hover:bg-gray-300 rounded-lg">
-                      <Image
-                        src="/hero.png"
-                        alt="car model"
-                        fill
-                        priority
-                        className="object-contain p-3"
-                      />
-                    </div>
-
-                    <div className="flex-1  relative w-full h-16 min-[336px]:h-20  sm:h-24 bg-gray-200  hover:bg-gray-300 rounded-lg">
-                      <Image
-                        src="/hero.png"
-                        alt="car model"
-                        fill
-                        priority
-                        className="object-contain p-3"
-                      />
-                    </div>
-
-                    <div className="flex-1 relative w-full h-16 min-[336px]:h-20  sm:h-24 bg-gray-200 hover:bg-gray-300 rounded-lg">
-                      <Image
-                        src="/hero.png"
-                        alt="car model"
-                        fill
-                        priority
-                        className="object-contain p-3"
-                      />
-                    </div>
+                    {thumbnails.map((thumb, index) => (
+                      <div
+                        key={index}
+                        className={`flex-1 relative w-full h-16 min-[336px]:h-20 sm:h-24 
+                         overflow-hidden rounded-lg cursor-pointer 
+                          ${selectedImage === thumb ? "ring-2 ring-blue-500" : ""}`}
+                       onClick={() => handleThumbnailClick(thumb, index)}
+                      >
+                        <Image
+                          src={thumb}
+                          alt={`car thumbnail ${index + 1}`}
+                          fill
+                          priority
+                          className="object-fill "
+                        />
+                      </div>
+                    ))}
                   </div>
                 </div>
 
@@ -106,17 +139,19 @@ const CarDetails = ({ isOpen, closeModal, car }: CarDetailsProps) => {
                   </h2>
 
                   <div className="mt-2 flex flex-col divide-y divide-gray-100">
-                    {Object.entries(car).map(([key, value]) => (
-                      <div
-                        className="flex justify-between py-2 text-sm sm:text-base"
-                        key={key}
-                      >
-                        <h4 className="text-gray-500 capitalize">
-                          {key.split("_").join(" ")}
-                        </h4>
-                        <p className="text-gray-800 font-medium">{value}</p>
-                      </div>
-                    ))}
+                    {Object.entries(car)
+                      .filter(([key]) => key !== "imageUrls") // 👈 exclude imageUrls
+                      .map(([key, value]) => (
+                        <div
+                          className="flex justify-between py-2 text-sm sm:text-base"
+                          key={key}
+                        >
+                          <h4 className="text-gray-500 capitalize">
+                            {key.split("_").join(" ")}
+                          </h4>
+                          <p className="text-gray-800 font-medium">{value}</p>
+                        </div>
+                      ))}
                   </div>
                 </div>
               </Dialog.Panel>

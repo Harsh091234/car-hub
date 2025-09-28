@@ -26,8 +26,8 @@ useEffect(() => {
     >
       <div className="max-w-7xl mx-auto flex justify-between items-center py-3 px-4 md:px-8">
         {/* Logo */}
-        <div className="flex-shrink-0">
-          <Image src="/logo.svg" alt="CarHub Logo" width={150} height={150} />
+        <div className="h-8 w-34">
+          <img src="/logo.svg" alt="CarHub Logo" className='object-fill h-full w-full' />
         </div>
 
         {/* Sign In Button */}

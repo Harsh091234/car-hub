@@ -1,5 +1,7 @@
 
+import { Car } from "@/generated/prisma";
 import { CarProps } from "../types"; 
+import api from "./axiosInstance";
 
 const API_URL = "https://api.carapi.app/vehicles";
 const API_KEY = "804d0c760a542516e0a9a1edc454d24f";
@@ -31,3 +33,37 @@ export const calculateCarRent = (city_mpg: number, year: number) => {
     const rentalRatePerDay = basePricePerDay + mileageRate + ageRate;
     return rentalRatePerDay.toFixed(0);
 }
+
+export const generateCarImageUrl = (car: CarProps, angle: string= "13") => {
+  const url = new URL("https://cdn.imagin.studio/getimage");
+
+  const {make, model, year} = car;
+  console.log("details make, model, year", make, model, year)
+  url.searchParams.append("customer", "hrjavascript-mastery");
+  url.searchParams.append("make", make);
+  url.searchParams.append("modelFamily", model.split(" ")[0]);
+  url.searchParams.append("zoomType", "fullscreen");
+  url.searchParams.append("modelYear", `${year}`);
+  url.searchParams.append("angle", `${angle}`);
+  console.log("url", url.toString())
+  return url.toString();
+
+}
+
+
+
+export const fetchCarImageUrl = async (car: CarProps) => {
+  const { year, make, model } = car;
+  try {
+    const response = await api.get('https://api.carsxe.com/v1/images', {
+      params: { year, make, model, angle: "29" },
+      headers: { 'Authorization': `Bearer ${API_KEY}` },
+    });
+
+    // Return only the first image URL if it exists
+    return response.data?.images?.[0]?.url || null;
+  } catch (error) {
+    console.error('Error fetching car image URL:', error);
+    return null;
+  }
+};

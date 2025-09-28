@@ -14,11 +14,12 @@ export default function Home() {
  useEffect(() => {
     async function fetchCars() {
       try {
-           setLoading(true);
-      const res = await axios.get(`/cars`);
+         
+           if(loading) {const res = await axios.get(`/cars`);
       
       setCars(res.data);
-      setLoading(false);
+      setLoading(false);}
+      
       } catch (error) {
           console.error("Error fetching cars:", error);
            setCars([]);
@@ -28,8 +29,9 @@ export default function Home() {
     }
 
     fetchCars();
-  }, [cars]);
+  }, [ loading]);
     
+ 
     const isDataEmpty = !Array.isArray(cars) || cars.length === 0;
  
   return (

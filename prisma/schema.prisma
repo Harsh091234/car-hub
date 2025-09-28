@@ -29,6 +29,7 @@ model Car {
   model          String
   transmission   String
   year           Int
+  imageUrls       String[]  @default([])
 }
 
 
