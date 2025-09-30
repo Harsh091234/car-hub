@@ -44,9 +44,9 @@ export default function Home() {
             Explore the cars you might like
           </p>
         </div>
-        <div className="flex flex-col md:flex-row gap-3 md:gap-10   md:items-center ">
+        <div className="flex flex-col md:flex-row gap-3 md:gap-5  flex-wrap  ">
           <SearchBar />
-          <div className="flex gap-2">
+          <div className="flex gap-1">
             <CustomFilter />
             <CustomFilter />
           </div>
