@@ -6,12 +6,18 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import React, { Fragment, useState } from "react";
 
+
+type Option = {
+  title: string;
+  value: string;
+};
+
 const CustomFilter = ({ title, options }: CustomFilterProps) => {
   const [selected, setSelected] = useState(options[0]);
   const router = useRouter();
 
-  const handleUpdateParams = (e: { title: string; value: string }) => {
-    const newPathName = updateSearchParams(title, e.value.toLowerCase());
+  const handleUpdateParams = (option: Option) => {
+    const newPathName = updateSearchParams(title, option.value.toLowerCase());
     router.push(newPathName);
   };
 
