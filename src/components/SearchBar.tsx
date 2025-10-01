@@ -4,16 +4,37 @@ import SearchManufacturer from './SearchManufacturer';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 
-const SearchBar = () => {
+
+
+import { useDispatch } from 'react-redux';
+import { fetchCars } from '@/store/slices/carsSlices';
+import { AppDispatch } from '@/store/store';
+import { FilterProps } from '@/types';
+interface SearchBarProps {
+  searchParams: FilterProps;
+}
+
+const SearchBar = ({searchParams}: SearchBarProps) => {
     const [manufacturer, setManufacturer] = useState("");
     const [model, setModel] = useState("");
+    const dispatch = useDispatch<AppDispatch>();
     const router = useRouter();
-    const handleSearch = (e: React.FormEvent<HTMLFormElement>) => {
+    const handleSearch = async(e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-
+        
         if(manufacturer === "" && model === ""){
             return alert("Please fill in the search bar");
         }
+        
+       // ✅ Hit endpoint via Redux thunk
+    dispatch(
+      fetchCars({
+        ...searchParams,
+        manufacturer: manufacturer.toLowerCase(),
+        model: model.toLowerCase(),
+      })
+    );
+
 
         updateSearchParams(model.toLowerCase(), manufacturer.toLowerCase())
     }
@@ -23,6 +44,14 @@ const SearchBar = () => {
 
         if(model){
             searchParams.set("model", model)
+        }
+        else{
+            searchParams.delete("model");
+        }
+
+        
+        if(manufacturer){
+            searchParams.set("manufacturer", manufacturer)
         }
         else{
             searchParams.delete("manufacturer");

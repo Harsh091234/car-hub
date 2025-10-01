@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-
+import { ReduxProvider } from "@/store/Provider";
 
 
 export const metadata: Metadata = {
@@ -17,13 +17,15 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en"      style={{filter:"invert(0)"}}>
+    <html lang="en"      >
       <body
         className=" bg-white min-h-screen  flex flex-col"
-      > 
+      >   <ReduxProvider> 
         <Navbar />
-        {children}
-        <Footer />
+          {children}
+          <Footer />
+          </ReduxProvider>
+
       </body>
     </html>
   );

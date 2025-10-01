@@ -1,5 +1,5 @@
 import React, { Fragment, useEffect, useState } from "react";
-import { CarProps } from "../../types";
+import { CarProps } from "../types";
 import { Dialog, Transition } from "@headlessui/react";
 import Image from "next/image";
 

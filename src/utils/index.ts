@@ -1,7 +1,8 @@
 
 import { Car } from "@/generated/prisma";
-import { CarProps } from "../types"; 
+import { CarProps, FilterProps } from "../types"; 
 import api from "./axiosInstance";
+import { Search } from "lucide-react";
 
 const API_URL = "https://api.carapi.app/vehicles";
 const API_KEY = "804d0c760a542516e0a9a1edc454d24f";
@@ -67,3 +68,14 @@ export const fetchCarImageUrl = async (car: CarProps) => {
     return null;
   }
 };
+
+export const updateSearchParams = (type: string, value: string) => {
+  const searchParams = new URLSearchParams(window.location.search);
+
+  searchParams.set(type, value);
+
+  const newPathName = `${window.location.pathname}? ${searchParams.toString}`
+  return newPathName;
+}
+
+

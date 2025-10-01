@@ -13,6 +13,7 @@
   "dependencies": {
     "@headlessui/react": "^2.2.8",
     "@prisma/client": "^6.16.3",
+    "@reduxjs/toolkit": "^2.9.0",
     "axios": "^1.12.2",
     "dotenv": "^17.2.2",
     "lucide-react": "^0.544.0",
@@ -20,7 +21,9 @@
     "pg": "^8.16.3",
     "prisma": "^6.16.3",
     "react": "19.1.0",
-    "react-dom": "19.1.0"
+    "react-dom": "19.1.0",
+    "react-hot-toast": "^2.6.0",
+    "react-redux": "^9.2.0"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
