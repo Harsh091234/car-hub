@@ -15,9 +15,20 @@ export default function Home({ searchParams }: HomeProps) {
   const dispatch = useDispatch<AppDispatch>();
   const { cars, loading, error } = useSelector((state: RootState) => state.cars);
 
-  useEffect(() => {
-    dispatch(fetchCars(searchParams));
-  }, [searchParams, dispatch]);
+
+    useEffect(() => {
+  const filters = {
+    manufacturer: searchParams?.manufacturer || "",
+    year: searchParams?.year || 2022,
+    fuel: searchParams?.fuel || "",
+    limit: searchParams?.limit || 10,
+    model: searchParams?.model || "",
+  };
+
+  dispatch(fetchCars(filters));
+}, [searchParams, dispatch]);
+
+
 
   const isDataEmpty = !Array.isArray(cars) || cars.length === 0;
 

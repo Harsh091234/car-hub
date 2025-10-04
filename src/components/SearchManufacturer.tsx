@@ -4,7 +4,7 @@ import { Combobox, Transition } from '@headlessui/react'
 import Image from 'next/image'
 import { manufacturers } from '../constants/index'
 
-const SearchManufacturer = ({manufacturer, setManufacturer} : SearchManufacturerProps) => {
+const SearchManufacturer: React.FC<SearchManufacturerProps> = ({manufacturer, setManufacturer} : SearchManufacturerProps) => {
       const [query, setQuery] = useState("");
 
       const filteredManufacturers = query === ""
@@ -33,7 +33,9 @@ const SearchManufacturer = ({manufacturer, setManufacturer} : SearchManufacturer
           className="w-full border-none py-1.5 text-sm outline-0 pl-2.5 text-gray-800 focus:ring-0 placeholder-gray-500"
           placeholder="Volkswagen"
           displayValue={(manufacturer: string) => manufacturer}
-          onChange={(e) => setQuery(e.target.value)}
+           onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                setQuery(e.target.value)
+              }
         />
       </div>
 

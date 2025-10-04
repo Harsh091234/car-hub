@@ -14,16 +14,17 @@ const initialState: CarsState = {
   error: null,
 };
 
-// Thunk for fetching cars
+
 export const fetchCars = createAsyncThunk(
   "cars/fetchCars",
   async (filters: FilterProps, { rejectWithValue }) => {
+    console.log("filters", filters)
     try {
       const res = await axios.get(`/cars`, {
         params: {
           manufacturer: filters.manufacturer || "",
           year: filters.year || 2022,
-          fuel: filters.fuel || "",
+          fuel: filters.fuel  || "",
           limit: filters.limit || 10,
           model: filters.model || "",
         },

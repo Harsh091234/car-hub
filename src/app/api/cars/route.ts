@@ -15,7 +15,7 @@ export async function GET(req: NextRequest, ) {
       where: {
         make: manufacturer ? { contains: manufacturer, mode: "insensitive" } : undefined,
         model: model ? { contains: model, mode: "insensitive" } : undefined,
-        fuel_type: fuel ? { equals: fuel } : undefined,
+        fuel_type: fuel ? { equals: fuel, mode: "insensitive" } : undefined,
         year: year ? { equals: year } : undefined,
       },
       take: limit,
