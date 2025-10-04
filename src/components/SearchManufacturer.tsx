@@ -47,7 +47,7 @@ const SearchManufacturer: React.FC<SearchManufacturerProps> = ({manufacturer, se
         leaveTo="opacity-0"
         afterEnter={() => setQuery("")}
       >
-        <Combobox.Options className="absolute mt-1 max-h-60 w-full overflow-auto rounded-lg bg-white py-1 text-base shadow-lg ring-1 ring-black/5 focus:outline-none sm:text-sm z-10">
+        <Combobox.Options className="absolute mt-1 max-h-60 w-full overflow-auto z-20 rounded-lg bg-white py-1 text-base shadow-lg ring-1 ring-black/5 focus:outline-none sm:text-sm ">
           {filteredManufacturers.length === 0 && query !== "" ? (
             <Combobox.Option
               value={query}

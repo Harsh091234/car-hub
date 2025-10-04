@@ -30,7 +30,7 @@ const CarCard = ({ car }: CarCardProps) => {
 
       {/* Car Image */}
       <div className="flex justify-center w-full">
-        <div className="a relative w-45 sm:w-52 md:w-60 lg:w-72 rounded-lg overflow-hidden h-28  md:h-36 lg:h-44 z-10">
+        <div className="a relative w-45 sm:w-52 md:w-60 lg:w-72 rounded-lg overflow-hidden h-28  md:h-36 lg:h-44 ">
   <Image
     src={imageUrls ? imageUrls[0] : "/car-placeholder.png"}
     alt="car"
